@@ -6,7 +6,7 @@ const links = [
   { href: '/', label: 'About' },
   { href: '/resume', label: 'Resume' },
   { href: '/portfolio', label: 'Portfolio' },
-  { href: '/blog', label: 'Achievements' },
+  { href: '/Achievement', label: 'Achievements' },
 ];
 
 export default function Navbar() {

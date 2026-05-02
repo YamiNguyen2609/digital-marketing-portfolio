@@ -1,25 +1,29 @@
 'use client';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useData } from '@/context/DataContext';
 
-const projects = [
-  { id: 1, title: 'Gourmania',  category: 'Applications',    img: '/images/gourmania.png' },
-  { id: 2, title: 'Nurot',     category: 'Web Development',  img: '/images/nurot.png'    },
-  { id: 3, title: 'Lorex',     category: 'Web Development',  img: '/images/lorex.png'    },
-  { id: 4, title: 'Canva',     category: 'UI/UX Design',     img: '/images/canva.png'    },
-  { id: 5, title: 'Klama',     category: 'Web Development',  img: '/images/klama.png'    },
-  { id: 6, title: 'Elemento',  category: 'Applications',    img: '/images/gourmania.png' },
-  { id: 7, title: 'Alpha',     category: 'Web Development',  img: '/images/nurot.png'    },
-  { id: 8, title: 'Micro',     category: 'UI/UX Design',     img: '/images/canva.png'    },
-  { id: 9, title: 'Omega',     category: 'UI/UX Design',     img: '/images/lorex.png'    },
-];
-
-const filters = ['All', 'Applications', 'UI/UX Design', 'Web Development'];
 
 export default function PortfolioPage() {
+  const { data, loading } = useData();
   const [active, setActive] = useState('All');
 
-  const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active);
+  const portfolios = data?.portfolio || [];
+
+  const filters = ['All', ...portfolios.map((p) => p.group)];
+
+  const filtered = active === 'All' ? portfolios.map((p) => p.items).flat() : portfolios.filter((p) => p.group === active).map((p) => p.items).flat();
+
+  if (loading) {
+    return (
+      <aside className="sidebar">
+        <div className="sidebar-avatar-wrap">
+          <div className="loading-placeholder" />
+        </div>
+        <h1 className="sidebar-name">Loading...</h1>
+      </aside>
+    );
+  }
 
   return (
     <div className="page-card">
@@ -44,15 +48,15 @@ export default function PortfolioPage() {
           <div key={p.id} className="portfolio-item">
             <Image
               className="portfolio-thumb"
-              src={p.img}
-              alt={p.title}
+              src={p.image}
+              alt={p.name}
               width={400}
               height={300}
               style={{ objectFit: 'cover' }}
             />
             <div className="portfolio-info">
               <div className="portfolio-category">{p.category}</div>
-              <div className="portfolio-title">{p.title}</div>
+              <div className="portfolio-title">{p.name}</div>
             </div>
           </div>
         ))}

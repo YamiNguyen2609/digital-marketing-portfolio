@@ -151,6 +151,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 14px;
+  cursor: default;
 }
 
 .sidebar-contact-icon {
@@ -263,6 +264,8 @@ textarea {
   font-weight: 500;
   transition: all 0.2s;
   white-space: nowrap;
+  width: inherit;
+  text-align: center;
 }
 
 .nav-link:hover {
@@ -278,6 +281,7 @@ textarea {
 
 /* ── Page card ── */
 .page-card {
+  width: 100%;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
@@ -338,6 +342,7 @@ textarea {
   border-radius: 16px;
   padding: 22px;
   transition: border-color 0.2s, transform 0.2s;
+  cursor: default;
 }
 
 .service-card:hover {
@@ -429,6 +434,7 @@ textarea {
   color: var(--text-muted);
   letter-spacing: 0.05em;
   transition: all 0.2s;
+  cursor: default;
 }
 
 .client-badge:hover {
@@ -884,6 +890,7 @@ textarea {
 
   .main-content {
     align-items: center;
+    width: 100%;
   }
 
   .navbar {
@@ -914,16 +921,22 @@ textarea {
     display: flex;
     flex-direction: column;
   }
-}
 
-@media (max-width: 425px) {
-  .nav-link {
-    padding: 10px 15px;
+  .focus-vission-card.left {
+    width: 100%;
+    padding-right: unset !important;
+    border-right: unset !important;
+  }
+
+  .focus-vission-card.right {
+    width: 100%;
+    border-left: unset !important;
+    padding-left: unset !important;
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
   .nav-link {
-    padding: 10px 8.5px;
+    padding: 10px 5px;
   }
 }
